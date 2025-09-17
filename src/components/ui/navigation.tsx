@@ -101,10 +101,10 @@ export const Navigation = ({ isAuthenticated = false, user, className }: Navigat
               </>
             ) : (
               <>
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" onClick={() => alert('Sign In clicked! This would open the login modal.')}>
                   Sign In
                 </Button>
-                <Button variant="default" size="sm" className="bg-gradient-primary hover:shadow-card-hover transition-all duration-300">
+                <Button variant="default" size="sm" className="bg-gradient-primary hover:shadow-card-hover transition-all duration-300" onClick={() => alert('Get Started clicked! This would open the registration modal.')}>
                   Get Started
                 </Button>
               </>
@@ -157,10 +157,10 @@ export const Navigation = ({ isAuthenticated = false, user, className }: Navigat
                     For Teachers
                   </Button>
                   <div className="pt-3 border-t border-border/50">
-                    <Button variant="ghost" className="justify-start w-full mb-2">
+                    <Button variant="ghost" className="justify-start w-full mb-2" onClick={() => alert('Sign In clicked! This would open the login modal.')}>
                       Sign In
                     </Button>
-                    <Button className="w-full bg-gradient-primary">
+                    <Button className="w-full bg-gradient-primary" onClick={() => alert('Get Started clicked! This would open the registration modal.')}>
                       Get Started
                     </Button>
                   </div>

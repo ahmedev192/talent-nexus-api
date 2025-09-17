@@ -70,6 +70,7 @@ export const HeroSection = () => {
               <Button 
                 size="lg" 
                 className="bg-white text-primary hover:bg-white/90 hover:shadow-glow transition-all duration-300 group"
+                onClick={() => alert('Start Learning clicked! This would navigate to the skill browser.')}
               >
                 Start Learning
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -78,6 +79,7 @@ export const HeroSection = () => {
                 size="lg" 
                 variant="outline" 
                 className="border-white/20 text-white hover:bg-white/10 backdrop-blur-sm"
+                onClick={() => alert('Become a Teacher clicked! This would open the teacher registration.')}
               >
                 Become a Teacher
               </Button>

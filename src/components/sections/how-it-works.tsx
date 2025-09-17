@@ -126,6 +126,7 @@ export const HowItWorksSection = () => {
               <Button 
                 size="lg" 
                 className="bg-white text-primary hover:bg-white/90 hover:shadow-glow transition-all duration-300"
+                onClick={() => alert('Sign Up Free clicked! This would open the registration modal.')}
               >
                 Sign Up Free
               </Button>
@@ -133,6 +134,7 @@ export const HowItWorksSection = () => {
                 size="lg" 
                 variant="outline" 
                 className="border-white/20 text-white hover:bg-white/10 backdrop-blur-sm"
+                onClick={() => alert('Browse Skills clicked! This would navigate to the skills browser.')}
               >
                 Browse Skills
               </Button>
