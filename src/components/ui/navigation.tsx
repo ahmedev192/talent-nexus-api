@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { AuthModal } from "@/components/ui/auth-modal";
 import { Bell, Search, Menu, X, BookOpen, Users, Calendar, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -19,6 +20,8 @@ interface NavigationProps {
 
 export const Navigation = ({ isAuthenticated = false, user, className }: NavigationProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
 
   return (
     <nav className={cn("border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50", className)}>
@@ -101,10 +104,25 @@ export const Navigation = ({ isAuthenticated = false, user, className }: Navigat
               </>
             ) : (
               <>
-                <Button variant="ghost" size="sm" onClick={() => alert('Sign In clicked! This would open the login modal.')}>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={() => {
+                    setAuthMode('signin');
+                    setAuthModalOpen(true);
+                  }}
+                >
                   Sign In
                 </Button>
-                <Button variant="default" size="sm" className="bg-gradient-primary hover:shadow-card-hover transition-all duration-300" onClick={() => alert('Get Started clicked! This would open the registration modal.')}>
+                <Button 
+                  variant="default" 
+                  size="sm" 
+                  className="bg-gradient-primary hover:shadow-card-hover transition-all duration-300" 
+                  onClick={() => {
+                    setAuthMode('signup');
+                    setAuthModalOpen(true);
+                  }}
+                >
                   Get Started
                 </Button>
               </>
@@ -157,10 +175,25 @@ export const Navigation = ({ isAuthenticated = false, user, className }: Navigat
                     For Teachers
                   </Button>
                   <div className="pt-3 border-t border-border/50">
-                    <Button variant="ghost" className="justify-start w-full mb-2" onClick={() => alert('Sign In clicked! This would open the login modal.')}>
+                    <Button 
+                      variant="ghost" 
+                      className="justify-start w-full mb-2" 
+                      onClick={() => {
+                        setAuthMode('signin');
+                        setAuthModalOpen(true);
+                        setIsMobileMenuOpen(false);
+                      }}
+                    >
                       Sign In
                     </Button>
-                    <Button className="w-full bg-gradient-primary" onClick={() => alert('Get Started clicked! This would open the registration modal.')}>
+                    <Button 
+                      className="w-full bg-gradient-primary" 
+                      onClick={() => {
+                        setAuthMode('signup');
+                        setAuthModalOpen(true);
+                        setIsMobileMenuOpen(false);
+                      }}
+                    >
                       Get Started
                     </Button>
                   </div>
@@ -170,6 +203,12 @@ export const Navigation = ({ isAuthenticated = false, user, className }: Navigat
           </div>
         )}
       </div>
+      
+      <AuthModal 
+        isOpen={authModalOpen} 
+        onClose={() => setAuthModalOpen(false)} 
+        initialMode={authMode}
+      />
     </nav>
   );
 };

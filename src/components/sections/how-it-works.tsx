@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { AuthModal } from "@/components/ui/auth-modal";
 import { 
   UserPlus, 
   Search, 
@@ -42,6 +44,9 @@ const steps = [
 ];
 
 export const HowItWorksSection = () => {
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signup');
+
   return (
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -126,7 +131,10 @@ export const HowItWorksSection = () => {
               <Button 
                 size="lg" 
                 className="bg-white text-primary hover:bg-white/90 hover:shadow-glow transition-all duration-300"
-                onClick={() => alert('Sign Up Free clicked! This would open the registration modal.')}
+                onClick={() => {
+                  setAuthMode('signup');
+                  setAuthModalOpen(true);
+                }}
               >
                 Sign Up Free
               </Button>
@@ -134,13 +142,22 @@ export const HowItWorksSection = () => {
                 size="lg" 
                 variant="outline" 
                 className="border-white/20 text-white hover:bg-white/10 backdrop-blur-sm"
-                onClick={() => alert('Browse Skills clicked! This would navigate to the skills browser.')}
+                onClick={() => {
+                  setAuthMode('signin');
+                  setAuthModalOpen(true);
+                }}
               >
                 Browse Skills
               </Button>
             </div>
           </div>
         </div>
+
+        <AuthModal 
+          isOpen={authModalOpen} 
+          onClose={() => setAuthModalOpen(false)} 
+          initialMode={authMode}
+        />
       </div>
     </section>
   );

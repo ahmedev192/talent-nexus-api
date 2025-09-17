@@ -1,9 +1,14 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { AuthModal } from "@/components/ui/auth-modal";
 import { ArrowRight, BookOpen, Users, Star, Zap } from "lucide-react";
 import heroImage from "@/assets/hero-learning.jpg";
 
 export const HeroSection = () => {
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signup');
+
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       {/* Background Gradient */}
@@ -70,7 +75,10 @@ export const HeroSection = () => {
               <Button 
                 size="lg" 
                 className="bg-white text-primary hover:bg-white/90 hover:shadow-glow transition-all duration-300 group"
-                onClick={() => alert('Start Learning clicked! This would navigate to the skill browser.')}
+                onClick={() => {
+                  setAuthMode('signup');
+                  setAuthModalOpen(true);
+                }}
               >
                 Start Learning
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -79,7 +87,10 @@ export const HeroSection = () => {
                 size="lg" 
                 variant="outline" 
                 className="border-white/20 text-white hover:bg-white/10 backdrop-blur-sm"
-                onClick={() => alert('Become a Teacher clicked! This would open the teacher registration.')}
+                onClick={() => {
+                  setAuthMode('signup');
+                  setAuthModalOpen(true);
+                }}
               >
                 Become a Teacher
               </Button>
@@ -141,6 +152,12 @@ export const HeroSection = () => {
           <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse" />
         </div>
       </div>
+
+      <AuthModal 
+        isOpen={authModalOpen} 
+        onClose={() => setAuthModalOpen(false)} 
+        initialMode={authMode}
+      />
     </section>
   );
 };
